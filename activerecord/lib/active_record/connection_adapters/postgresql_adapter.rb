@@ -1,12 +1,6 @@
 require 'active_record/connection_adapters/abstract_adapter'
 require 'active_record/connection_adapters/statement_pool'
-require 'active_record/connection_adapters/postgresql/oid'
-require 'active_record/connection_adapters/postgresql/cast'
-require 'active_record/connection_adapters/postgresql/array_parser'
-require 'active_record/connection_adapters/postgresql/quoting'
-require 'active_record/connection_adapters/postgresql/schema_statements'
-require 'active_record/connection_adapters/postgresql/database_statements'
-require 'active_record/connection_adapters/postgresql/referential_integrity'
+
 require 'arel/visitors/bind_visitor'
 
 # Make sure we're using pg high enough for PGResult#values
@@ -45,6 +39,10 @@ module ActiveRecord
   module ConnectionAdapters
     # PostgreSQL-specific extensions to column definitions in a table.
     class PostgreSQLColumn < Column #:nodoc:
+
+      require 'active_record/connection_adapters/postgresql/array_parser'
+      require 'active_record/connection_adapters/postgresql/cast'
+
       attr_accessor :array
 
       def initialize(name, default, oid_type, sql_type = nil, null = true)
@@ -287,6 +285,15 @@ module ActiveRecord
     # In addition, default connection parameters of libpq can be set per environment variables.
     # See http://www.postgresql.org/docs/9.1/static/libpq-envars.html .
     class PostgreSQLAdapter < AbstractAdapter
+
+      # NOTE: requiring these after PostgreSQLAdapter class is created allows for sharing (with AR-JDBC)
+      # as we can avoid those multiple `class PostgreSQLAdapter < AbstractAdapter` declarations ...
+      require 'active_record/connection_adapters/postgresql/oid'
+      require 'active_record/connection_adapters/postgresql/quoting'
+      require 'active_record/connection_adapters/postgresql/schema_statements'
+      require 'active_record/connection_adapters/postgresql/database_statements'
+      require 'active_record/connection_adapters/postgresql/referential_integrity'
+
       class ColumnDefinition < ActiveRecord::ConnectionAdapters::ColumnDefinition
         attr_accessor :array
       end

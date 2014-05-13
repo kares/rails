@@ -1,6 +1,6 @@
 module ActiveRecord
   module ConnectionAdapters
-    class PostgreSQLColumn < Column
+    class PostgreSQLColumn
       module ArrayParser
 
         DOUBLE_QUOTE = '"'

@@ -1,6 +1,6 @@
 module ActiveRecord
   module ConnectionAdapters
-    class PostgreSQLAdapter < AbstractAdapter
+    class PostgreSQLAdapter
       class SchemaCreation < AbstractAdapter::SchemaCreation
         private
 
