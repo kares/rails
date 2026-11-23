@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+gem "minitest", ">= 5.1"
 require "minitest"
 require "active_support/testing/tagged_logging"
 require "active_support/testing/setup_and_teardown"
