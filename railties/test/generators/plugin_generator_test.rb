@@ -185,6 +185,7 @@ class PluginGeneratorTest < Rails::Generators::TestCase
   def test_generating_test_files_in_full_mode
     run_generator [destination_root, "--full"]
     assert_directory "test/integration/"
+    assert_gem "minitest"
 
     assert_file "test/integration/navigation_test.rb", /ActionDispatch::IntegrationTest/
   end
@@ -637,6 +638,7 @@ class PluginGeneratorTest < Rails::Generators::TestCase
   def test_skipping_test_files
     run_generator [destination_root, "--skip-test"]
     assert_no_directory "test"
+    assert_no_gem "minitest"
     assert_file ".gitignore" do |contents|
       assert_no_match(/test\/dummy/, contents)
     end

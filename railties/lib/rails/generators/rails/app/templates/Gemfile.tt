@@ -83,11 +83,16 @@ group :development do
 end
 <% end -%>
 <% end -%>
-<%- if depends_on_system_test? -%>
+<%- unless options.skip_test? -%>
 
 group :test do
+  # Testing framework used by Rails [https://guides.rubyonrails.org/testing.html]
+  gem "minitest", require: false
+<%- if depends_on_system_test? -%>
+
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", require: false
   gem "selenium-webdriver", require: false
+<%- end -%>
 end
 <%- end -%>

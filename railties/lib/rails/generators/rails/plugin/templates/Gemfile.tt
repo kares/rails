@@ -7,6 +7,10 @@ gemspec
 <% gemfile_entries.each do |gemfile_entry| %>
 <%= gemfile_entry %>
 <% end -%>
+<%- unless options.skip_test? -%>
+
+gem "minitest"
+<%- end -%>
 <%- unless options.skip_rubocop? -%>
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
