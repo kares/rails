@@ -69,7 +69,6 @@ PATH
       i18n (>= 1.6, < 2)
       json
       logger (>= 1.4.2)
-      minitest (>= 5.1)
       psych (>= 4)
       ractor-dispatch (>= 0.3.0)
       securerandom (>= 0.3)
